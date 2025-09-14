@@ -1,11 +1,11 @@
 { pkgs, ... }:
+let
+  pipyPackages = pkgs.pypy3Packages;
+in
 pkgs.mkShell {
-  packages = [
-    (pkgs.python3.withPackages (python-pkgs: [
-      python-pkgs.graphviz
-      python-pkgs.pprintpp
-      python-pkgs.setuptools
-    ]))
+  buildInputs = with pipyPackages; [
+    graphviz
+    pprintpp
     pkgs.pyright
   ];
 }
