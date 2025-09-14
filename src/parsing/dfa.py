@@ -37,7 +37,6 @@ def _jsonToDfa(json_str: str) -> DFAState:
     return id_to_state[data["start"]]
 
 def loadDfaFromFile(path: str) -> DFAState:
-    """Read JSON from `path` and return reconstructed DFAState."""
     with open(path, "r", encoding="utf-8") as fh:
         js = fh.read()
     return _jsonToDfa(js)
