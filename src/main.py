@@ -1,5 +1,6 @@
 from match.dfa import matchStringToDfa
 from parsing.dfa import loadDfaFromFile
+from parsing.epsilon_removal import removeEpsilonProductions
 from parsing.gramatic import stringToGramatic
 from utils.argument_parsing import parseLexerArgs
 from utils.character_parsing import regexToStandarizeRegex
@@ -23,7 +24,8 @@ if __name__ == "__main__":
             unparsed_gramatic.append(line)
 
     gramatic = stringToGramatic(unparsed_gramatic)
-    print(gramatic)
+
+    removeEpsilonProductions(gramatic)
     # now that we have checked them, we start
  
 
