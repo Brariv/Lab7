@@ -53,7 +53,7 @@ def removeEpsilonProductions(grammar: dict[str, list[str]]) -> dict[str, list[st
     # remove epsilon if not from start
     start = list(grammar.keys())[0]
     for head in newG:
-        if head != start and "𝜀" in newG[head]:
+        if "𝜀" in newG[head]:
             newG[head].remove("𝜀")
 
     print("\n=== Resulting Grammar ===")

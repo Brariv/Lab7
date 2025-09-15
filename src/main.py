@@ -20,8 +20,11 @@ if __name__ == "__main__":
     for line in lines:
         parsed_line = regexToStandarizeRegex(line)
 
-        if matchStringToDfa(dfa, parsed_line):
-            unparsed_gramatic.append(line)
+        if matchStringToDfa(dfa, parsed_line) == False:
+            print("Not all lines in the grammar, repect the grammar regex")
+            exit(1)
+
+        unparsed_gramatic.append(line)
 
     gramatic = stringToGramatic(unparsed_gramatic)
 
