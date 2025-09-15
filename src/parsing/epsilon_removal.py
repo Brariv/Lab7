@@ -1,9 +1,9 @@
 def removeEpsilonProductions(grammar: dict[str, list[str]]) -> dict[str, list[str]]:
-    print("=== Input Grammar ===")
+    print("=== Given Grammar ===")
     for head, prods in grammar.items():
         print(f"{head} → {' | '.join(prods)}")
 
-    # Step 1: find nullable symbols
+    # find nullable symbols
     nullable = set()
     changed = True
     while changed:
@@ -11,14 +11,14 @@ def removeEpsilonProductions(grammar: dict[str, list[str]]) -> dict[str, list[st
         for head, prods in grammar.items():
             for p in prods:
                 if p == "𝜀" or all(ch in nullable for ch in p):
-                    if head not in nullable:
+                    if head not in nullable: # if we haven't already put the production in the nullable
                         nullable.add(head)
                         changed = True
 
     print("\n=== Nullable Symbols ===")
     print(nullable)
 
-    # Step 2: generate new productions
+    # generate new productions
     newG = {head: set() for head in grammar}
     for head, prods in grammar.items():
         for p in prods:
@@ -50,7 +50,7 @@ def removeEpsilonProductions(grammar: dict[str, list[str]]) -> dict[str, list[st
                 print(f"Generated from {p}: {s}")
                 newG[head].add(s)
 
-    # Step 3: remove epsilon if not from start
+    # remove epsilon if not from start
     start = list(grammar.keys())[0]
     for head in newG:
         if head != start and "𝜀" in newG[head]:
